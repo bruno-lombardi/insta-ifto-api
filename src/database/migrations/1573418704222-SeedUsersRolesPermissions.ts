@@ -38,14 +38,14 @@ export class SeedUsersRolesPermissions1573418704222
 
     await roleRepository.save([].concat(adminRole, managerRole, customerRole));
     const adminUser = await admin();
-    let customersUsers = await users();
-    await userRepository.save([].concat(adminUser, customersUsers));
-    customersUsers = customersUsers.map(u => ({
-      roles: [customerRole],
-      ...u,
-    }));
+    // let customersUsers = await users();
+    // await userRepository.save([].concat(adminUser, customersUsers));
+    // customersUsers = customersUsers.map(u => ({
+    //   roles: [customerRole],
+    //   ...u,
+    // }));
     adminUser.roles = [adminRole];
-    await userRepository.save([].concat(adminUser, customersUsers));
+    await userRepository.save([].concat(adminUser));
   }
 
   // tslint:disable-next-line: no-empty
