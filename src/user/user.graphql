@@ -1,0 +1,51 @@
+input CreateUserInput {
+  email: String!
+  password: String!
+  firstName: String!
+  lastName: String!
+}
+
+input UpdateUserInput {
+  firstName: String
+  lastName: String
+  socialSecurityNumber: String
+}
+
+input PaginateUserInput {
+  page: Int!
+  limit: Int!
+  firstName: String
+  lastName: String
+  socialSecurityNumber: String
+  email: String
+}
+
+type PaginateUserResult {
+  page: Int!
+  limit: Int!
+  totalPages: Int!
+  count: Int!
+  data: [User!]
+}
+
+type User {
+  id: ID!
+  email: String!
+  firstName: String!
+  lastName: String!
+  confirmed: Boolean
+  socialSecurityNumber: String
+  roles: [Role!]
+}
+
+type Query {
+  users(input: PaginateUserInput): PaginateUserResult!
+  user(id: ID!): User
+  me: User
+}
+
+type Mutation {
+  createUser(createInput: CreateUserInput): User
+  deleteUser(id: ID!): Boolean
+  updateUser(id: ID!, updateInput: UpdateUserInput!): User
+}

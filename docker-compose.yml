@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  app:
+    build: .
+    command: >
+      sh -c "yarn typeorm:run && yarn start:prod"
+    restart: always
+    environment:
+      - DB_NAME=ifto
+      - DB_USER=docker
+      - DB_PASSWORD=AO1cVa1kl321
+      - DB_PORT=5432
+      - APP_KEY=F90CC0BBB0BB429684EB86B171032F10
+      - PORT=3000
+      - DB_HOST=postgres
+    ports:
+      - "3000:3000"
+    depends_on:
+      - 'postgres'
+  postgres:
+    image: kartoza/postgis
+    ports:
+      - "25432:5432"
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASS=AO1cVa1kl321
+      - POSTGRES_DBNAME=ifto
